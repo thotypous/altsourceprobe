@@ -431,7 +431,7 @@ proc solve_instance_id {hardware_id device_id instance} {
 
 proc solve_url {sock url result} {
 	upvar $result contents
-    if { [regexp {^/(\d+)/(\d+)/([^/]+)/(get|cur|[[:xdigit:]]+)$} $url {} hardware_id device_id instance option] } {
+	if { [regexp {^/(\d+)/(\d+)/([^/]+)/(get|cur|[[:xdigit:]]+)$} $url {} hardware_id device_id instance option] } {
 		set inst [solve_instance_id $hardware_id $device_id $instance]
 		init_probe $hardware_id $device_id
 		switch $option {
@@ -442,7 +442,7 @@ proc solve_url {sock url result} {
 				set contents "\"ok\""
 			}
 		}
-    } elseif { [string equal $url "/"] } {
+	} elseif { [string equal $url "/"] } {
 		set contents [get_hardware_json]
 	} elseif { [regexp {^/(\d+)/?$} $url {} hardware_id] } {
 		set contents [get_device_json $hardware_id]
