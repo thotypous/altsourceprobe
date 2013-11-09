@@ -327,7 +327,7 @@ proc get_hardware_json {} {
 			dict set hardware_toid $hardware_name $hardware_id_counter
 			dict set hardware_fromid $hardware_id_counter $hardware_name
 		}
-		lappend vec "[dict get $hardware_toid $hardware_name]:[json_string $hardware_name]"
+		lappend vec "\"[dict get $hardware_toid $hardware_name]\":[json_string $hardware_name]"
 	}
 	return "\{[join $vec ,]\}"
 }
@@ -357,7 +357,7 @@ proc get_device_json {hardware_id} {
 			dict set device_toid $hardware_id $device_name $curr_id
 			dict set device_fromid $hardware_id $curr_id $device_name
 		}
-		lappend vec "$curr_id:[json_string $device_name]"
+		lappend vec "\"$curr_id\":[json_string $device_name]"
 	}
 	return "\{[join $vec ,]\}"
 }
@@ -413,7 +413,7 @@ proc get_instance_json {hardware_id device_id} {
 		set instance_id [lindex $instance 0]
 		set instance_name [lindex $instance 3]
 		dict set instance_toid $hardware_id $device_id $instance_name $instance_id
-		lappend vec "$instance_id:\[[json_string $instance_name],[lindex $instance 1],[lindex $instance 2]\]"
+		lappend vec "\"$instance_id\":\[[json_string $instance_name],[lindex $instance 1],[lindex $instance 2]\]"
 	}
 	return "\{[join $vec ,]\}"
 }
