@@ -110,8 +110,6 @@ class JTAGInstance(object):
             response = self.request('/get')
         else:
             return super(JTAGInstance, self).__getattr__(name)
-        if isinstance(response, dict):
-            raise JTAGError(response)
         if response == '':
             return 0
         return int(response, 16)
