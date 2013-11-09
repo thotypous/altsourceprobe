@@ -7,4 +7,4 @@ See the `AltSourceProbe.bsv` file for a brief description of the available modul
 
 The `Example.bsv` file contains a simple example, which controls the DE2_70 board LEDs using JTAG.
 
-The `jtaghttpd.tcl` file consists of a simple HTTP server which can be used to talk with Altera JTAG devices in other languages besides TCL. Beware we are not experienced TCL coders. Just run the file using the `quartus_stp` interpreter to start the server. Please look at the comments at the beginning of the file for documentation.
+The `jtaghttpd.tcl` file consists of a simple HTTP server which can be used to talk with Altera JTAG devices in other languages besides TCL. Beware we are not experienced TCL coders. Just run the file using the `quartus_stp -t` interpreter to start the server. Please look at the comments at the beginning of the file for documentation.
