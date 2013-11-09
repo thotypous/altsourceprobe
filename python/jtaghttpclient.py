@@ -83,7 +83,17 @@ class JTAGInstance(object):
         return 'JTAGInstance(%s, source[%d], probe[%d])' % (
             repr(self.name), self.source_width, self.probe_width)
     def request(self, path):
-        return self.parent.request('/%d%s'% (self.id, path))
+        retries = 4
+        while True:
+            response = self.parent.request('/%d%s'% (self.id, path))
+            if isinstance(response, dict):
+                if retries > 0 and 'error' in response and 'internal Tcl' in response['error']:
+                    self.parent.request('/')  # reset probe in progress
+                    retries -= 1
+                else:
+                    raise JTAGError(response)
+            else:
+                return response
     def __setattr__(self, name, value):
         if name == 'source':
             response = self.request('/%x' % value)
