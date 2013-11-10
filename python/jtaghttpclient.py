@@ -39,7 +39,7 @@ class JTAGServerDir(FallbackDict):
             
 class JTAGServerSubDir(JTAGServerDir):
     def __init__(self, parent, id, name):
-        super(JTAGServerDir, self).__init__()
+        super(JTAGServerSubDir, self).__init__()
         self.parent = parent
         self.id = id
         self.name = name
