@@ -109,7 +109,7 @@ class JTAGInstance(object):
         elif name == 'probe':
             response = self.request('/get')
         else:
-            return super(JTAGInstance, self).__getattr__(name)
+            raise AttributeError("'JTAGInstance' object has no attribute '%s'" % name)
         if response == '':
             return 0
         return int(response, 16)
