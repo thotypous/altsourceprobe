@@ -100,7 +100,7 @@ class JTAGInstance(object):
             if response != 'ok':
                 raise JTAGError(response)
         elif name == 'probe':
-            raise KeyError('probe cannot be set')
+            raise AttributeError("'JTAGInstance' attribute 'probe' is read-only")
         else:
             super(JTAGInstance, self).__setattr__(name, value)
     def __getattr__(self, name):
