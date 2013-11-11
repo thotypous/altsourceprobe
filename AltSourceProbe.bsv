@@ -12,7 +12,11 @@ endinterface
 // Its _write method needs to be enabled every cycle.
 import "BVI" AltSourceProbe =
     module mkAltSourceProbe#(String id, tr initv) (AltSourceProbe#(tr, tw))
-    provisos (Bits#(tr, sr), Bits#(tw, sw));
+    provisos (
+            Bits#(tr, sr), Bits#(tw, sw),
+            Add#(pad, sr, TMul#(TDiv#(sr, 4), 4))  // by request of bsc
+    );
+
         parameter INSTANCE_ID = id;
         parameter SOURCE_WIDTH = valueOf(sr);
         parameter SOURCE_INITIAL_VALUE = " " +
@@ -34,7 +38,11 @@ import "BVI" AltSourceProbe =
 // This implementation exposes a default value to the probe
 // during every cycle on which _write is not enabled.
 module mkAltSourceDProbe#(String id, tr initv, tw defv) (AltSourceProbe#(tr, tw))
-provisos (Bits#(tr, sr), Bits#(tw, sw));
+    provisos (
+            Bits#(tr, sr), Bits#(tw, sw),
+            Add#(pad, sr, TMul#(TDiv#(sr, 4), 4))  // by request of bsc
+    );
+
     AltSourceProbe#(tr, tw) child <- mkAltSourceProbe(id, initv);
     Wire#(tw) writeval <- mkDWire(defv);
 
@@ -54,7 +62,11 @@ endmodule
 // This implementation uses a registered probe,
 // to hold the last value written to it.
 module mkAltSourceRProbe#(String id, tr initv, tw defv) (AltSourceProbe#(tr, tw))
-provisos (Bits#(tr, sr), Bits#(tw, sw));
+    provisos (
+            Bits#(tr, sr), Bits#(tw, sw),
+            Add#(pad, sr, TMul#(TDiv#(sr, 4), 4))  // by request of bsc
+    );
+
     AltSourceProbe#(tr, tw) child <- mkAltSourceProbe(id, initv);
     Reg#(tw) writeval <- mkReg(defv);
 
