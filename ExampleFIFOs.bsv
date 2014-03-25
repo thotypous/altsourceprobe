@@ -1,6 +1,4 @@
 import JtagGetPut::*;
-import GetPut::*;
-import FIFOF::*;
 import SpecialFIFOs::*;
 import Connectable::*;
 

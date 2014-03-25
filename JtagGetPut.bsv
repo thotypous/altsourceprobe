@@ -1,6 +1,11 @@
 import AltSourceProbe::*;
 import GetPut::*;
+export GetPut::*;
 import FIFOF::*;
+export FIFOF::*;
+
+export mkJtagGet;
+export mkJtagPut;
 
 module mkJtagGet#(String instance_name, module#(FIFOF#(a)) mkFIFOF)(Get#(a))
 provisos (Bits#(Maybe#(a), sma), Bits#(a, sa));
