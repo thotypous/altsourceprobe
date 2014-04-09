@@ -8,17 +8,21 @@ interface AltSourceProbe#(type tr, type tw);
 endinterface
 
 
-// Low-level alt_sourceprobe wrapper.
+// Low-level altsource_probe wrapper.
 // Its _write method needs to be enabled every cycle.
-import "BVI" AltSourceProbe =
+import "BVI" altsource_probe =
     module mkAltSourceProbe#(String id, tr initv) (AltSourceProbe#(tr, tw))
     provisos (Bits#(tr, sr), Bits#(tw, sw));
 
-        parameter INSTANCE_ID = id;
-        parameter SOURCE_WIDTH = valueOf(sr);
-        parameter SOURCE_INITIAL_VALUE = " " +
+        parameter instance_id = id;
+        parameter source_width = valueOf(sr);
+        parameter source_initial_value = " " +
             (valueOf(sr) > 0 ? toHex(pack(initv)) : "");
-        parameter PROBE_WIDTH = valueOf(sw);
+        parameter probe_width = valueOf(sw);
+
+        parameter enable_metastability = "YES";
+        parameter sld_auto_instance_index = "YES";
+        parameter sld_instance_index = 0;
 
         method source _read();
         method _write(probe) enable((*inhigh*)EN);
