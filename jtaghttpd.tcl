@@ -8,7 +8,7 @@
 #     http://server/
 #   List FPGA devices connected to a JTAG interface:
 #     http://server/<hardware_id>
-#   List alt_sourceprobe instances contained in a FPGA:
+#   List altsource_probe instances contained in a FPGA:
 #     http://server/<hardware_id>/<device_id>
 #   Read hex value from probe:
 #     http://server/<hardware_id>/<device_id>/<instance>/get
